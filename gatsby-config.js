@@ -4,7 +4,6 @@ module.exports = {
     description: `Crop and Compress Images`,
     author: `@good3n`,
     siteUrl: `https://ohcrop.gatsbyjs.io/`,
-    pathPrefix: "/ohcrop",
   },
   plugins: [
     `gatsby-plugin-styled-components`,
