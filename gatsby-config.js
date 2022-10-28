@@ -7,6 +7,7 @@ module.exports = {
     pathPrefix: "/ohcrop",
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
