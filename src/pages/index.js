@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import AvatarEditor from "react-avatar-editor"
 import Resizer from "react-image-file-resizer"
 import { copyImageToClipboard } from "copy-image-clipboard"
@@ -7,9 +7,18 @@ import Layout from "../components/layout"
 const IndexPage = () => {
   const [oldImage, setOldImage] = useState("")
   const [newImage, setNewImage] = useState("")
+  const [copied, setCopied] = useState(false)
   const editor = useRef(null)
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCopied(false)
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [copied])
+
   const handleCopy = image => {
+    setCopied(true)
     copyImageToClipboard(image)
       .then(() => {
         console.log("Image Copied")
@@ -50,7 +59,7 @@ const IndexPage = () => {
     }
   }
 
-  const newSize = parseFloat(new Blob([newImage]).size / 1024).toFixed(2)
+  const newSize = parseFloat((newImage.length * (3 / 4) - 2) / 1024).toFixed(2)
   const oldSize = parseFloat(oldImage.size / 1024).toFixed(2)
   const savings = parseFloat(((oldSize - newSize) / oldSize) * 100).toFixed(2)
 
@@ -100,19 +109,18 @@ const IndexPage = () => {
             if (editor) {
               // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
               // drawn on another canvas, or added to the DOM.
-              const canvas = editor.current.getImage()
-              // console.log(canvas)
+              // const canvas = editor.current.getImage()
 
               // If you want the image resized to the canvas size (also a HTMLCanvasElement)
               const canvasScaled = editor.current.getImageScaledToCanvas()
               handleCopy(canvasScaled.toDataURL())
-              console.log(canvasScaled.toDataURL())
             }
           }}
         >
           Copy
         </button>
       ) : null}
+      <div className={`copied ${copied && `active`}`}>Copied!</div>
     </Layout>
   )
 }

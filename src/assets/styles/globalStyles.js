@@ -97,6 +97,30 @@ const GlobalStyle = createGlobalStyle`
       color: #4FA095;
     }
   }
+
+  .copied {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(88, 55, 208, 0.8);
+    z-index: 1;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vw;
+    font-weight: 700;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 `
 
 export default GlobalStyle
