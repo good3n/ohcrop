@@ -35,7 +35,7 @@ const IndexPage = () => {
         280, // max width
         360, // max height
         "JPEG", // is the compressFormat of the resized new image.
-        70, // is the quality of the resized new image.
+        80, // is the quality of the resized new image.
         0, // is the degree of clockwise rotation to apply to uploaded files EXIF data, if available.
         uri => {
           // is the callBack function of the resized new image URI.
